@@ -2,11 +2,11 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.contrib.auth import models as auth_models
-
 import webshop_01.constants as constants
 from webshop_01.users.managers import ShopUserManager
 
 
+# TODO EMAIL VERIFICATION!!!!!!!!
 class ShopUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
         unique=True,
