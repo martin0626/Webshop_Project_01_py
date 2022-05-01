@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils.text import slugify
 from djrichtextfield.models import RichTextField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
@@ -9,7 +10,7 @@ import webshop_01.constants as constants
 
 class Category(MPTTModel):
     # Helpful link: https://django-mptt.readthedocs.io/en/latest/tutorial.html
-    name = models.CharField(
+    title = models.CharField(
         max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN,
         unique=True,
     )
@@ -21,8 +22,29 @@ class Category(MPTTModel):
         related_name='children'
     )
 
+    slug = models.SlugField(
+        unique=True,
+        blank=True,
+    )
+
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['title']
+
+    def __str__(self):
+        return self.title
+
+
+class Brand(models.Model):
+    name = models.CharField(
+        max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN,
+    )
+    logo = models.ImageField(
+        upload_to="brand_photos",
+        null=True,
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
@@ -49,8 +71,9 @@ class Product(models.Model):
         default=0
     )
 
-    brand = models.CharField(
-        max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.CASCADE,
     )
 
     description = RichTextField()
@@ -72,3 +95,30 @@ class Product(models.Model):
         Category,
         on_delete=models.CASCADE,
     )
+
+    slug = models.SlugField(
+        unique=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class ProductGallery(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    image = models.ImageField(
+        upload_to='product_photos'
+    )
+    is_active = models.BooleanField(
+        default=True,
+    )
+    is_cover = models.BooleanField(
+        default=False,
+    )
+
+
+
