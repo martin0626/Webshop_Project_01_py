@@ -119,6 +119,3 @@ class ProductGallery(models.Model):
     is_cover = models.BooleanField(
         default=False,
     )
-
-
-

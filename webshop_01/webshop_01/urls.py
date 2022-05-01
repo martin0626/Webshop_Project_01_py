@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('webshop_01.shop.urls')),
+    path('', include('webshop_01.users.urls')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
 ]
