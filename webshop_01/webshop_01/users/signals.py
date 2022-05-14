@@ -12,4 +12,4 @@ def profile_creator(sender, instance, created, **kwargs):
     if created:
         profile = Profile(user=instance)
         profile.save()
-        send_email_message(instance)
+        send_email_message(instance.email, instance.id)

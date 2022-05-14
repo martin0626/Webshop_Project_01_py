@@ -20,6 +20,10 @@ class ShopUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         default=False,
     )
 
+    is_active = models.BooleanField(
+        default=False,
+    )
+
     USERNAME_FIELD = 'email'
     object = ShopUserManager()
 

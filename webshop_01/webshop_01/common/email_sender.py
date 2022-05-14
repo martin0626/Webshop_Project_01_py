@@ -1,16 +1,30 @@
 import os
 
+from django.contrib import auth
 from django.core.mail import EmailMessage
+from django.urls import reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+
+from webshop_01.users.utils import token_generator
+
+user = auth.get_user_model()
 
 
-def send_email_message(email, username=None):
-    body = f'Thank you for your registration!\nYou are welcome!!'
+def send_email_message(email, user_id):
+
+    uidb64 = urlsafe_base64_encode(force_bytes(user_id))
+    token = token_generator.make_token(user.object.get(id=user_id))
+
+    domain = 'http://127.0.0.1:8000'
+    link = reverse('activate', kwargs={
+        'uidb64': uidb64,
+        'token': token,
+    })
+    activate_url = domain + link
+    body = f'Thank you for your registration!\nYou are welcome!!\nActivate your account from here {activate_url}'
     sender = os.environ.get('GMAIL_USER')
-    header = 'Hello, Best Regards!'
-
-    if username:
-        body = f'Thank you for your registration {username}!\nYou are welcome!!' \
-               f'\nNow you can create articles, edit and delete them.'
+    header = 'Your Activation Link!'
 
     email = EmailMessage(
         header,
