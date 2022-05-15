@@ -40,9 +40,12 @@ INSTALLED_APPS = [
 
     'webshop_01.shop',
     'webshop_01.users',
+    'webshop_01.navigation',
+    'webshop_01.text_pages',
 
     'djrichtextfield',
     'mptt',
+    'adminsortable2'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'webshop_01.navigation.context_processors.nav_processor',
             ],
         },
     },
