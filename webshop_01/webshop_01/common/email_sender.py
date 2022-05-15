@@ -21,7 +21,7 @@ def send_email_message(email, user_id):
         'uidb64': uidb64,
         'token': token,
     })
-    activate_url = domain + link
+    activate_url = 'http://127.0.0.1:8000' + link
     body = f'Thank you for your registration!\nYou are welcome!!\nActivate your account from here {activate_url}'
     sender = os.environ.get('GMAIL_USER')
     header = 'Your Activation Link!'

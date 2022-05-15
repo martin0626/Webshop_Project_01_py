@@ -6,7 +6,6 @@ import webshop_01.constants as constants
 from webshop_01.users.managers import ShopUserManager
 
 
-# TODO EMAIL VERIFICATION!!!!!!!!
 class ShopUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
         unique=True,
