@@ -14,23 +14,31 @@
             <div class="content">
 
 
-                <h3>Login</h3>
+                <h3>Register</h3>
                 <hr/>
-                <form id="auth_form" method="post" action="{% url 'login' %}">
+                <form id="auth_form" method="post" action="{% url 'register' %}">
                     {% csrf_token %}
-                    {% if form.errors %}
-                        <span style="color: red"><b>{{ form.errors}}</b></span>
+                    {% if form.errors.email %}
+                        <span style="color: red"><b>{{ form.errors.email }}</b></span>
                     {% endif %}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        {{ form.username }}
+                        {{ form.email }}
                     </div>
+                    {% if form.errors.password2 %}
+                        <span style="color: red"><b>{{ form.errors.password2 }}</b></span>
+                    {% endif %}
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        {{ form.password }}
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password Confirmation</label>
+                        {{ form.password2 }}
                     </div>
                     <div class="col-md-12 pt-3 text-center">
-                        <button id="auth_btn" type="submit" class="btn btn-success">Login</button>
+                        <button id="auth_btn" type="submit" class="btn btn-success">Register</button>
                     </div>
                     <hr/>
                 </form>

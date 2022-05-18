@@ -42,20 +42,29 @@
             <div class="flex-fill">
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     {% for btn in base_navigation %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
-                        </li>
+                        {% if btn.title == 'Register' and request.user.is_authenticated %}
+                        {% elif btn.title == 'Login' and request.user.is_authenticated %}
+                        {% elif btn.title == 'Logout' and request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
+                            </li>
+                        {% elif btn.title != 'Logout' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
+                            </li>
+                        {% endif %}
+
                     {% endfor %}
 
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="about.html">About</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{% url 'shop' %}">Shop</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="contact.html">Contact</a>#}
-{#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="nav-link" href="about.html">About</a>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="nav-link" href="{% url 'shop' %}">Shop</a>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="nav-link" href="contact.html">Contact</a>#}
+                    {#                    </li>#}
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">

@@ -10,6 +10,9 @@ class BaseNavigation(models.Model):
         ('contact', 'contact'),
         ('about', 'about'),
         ('home', 'home'),
+        ('login', 'login'),
+        ('register', 'register'),
+        ('logout', 'logout'),
     )
 
     title = models.CharField(
