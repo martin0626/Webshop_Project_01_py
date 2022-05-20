@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'webshop_01.users',
     'webshop_01.navigation',
     'webshop_01.text_pages',
+    'webshop_01.contacts',
 
     'djrichtextfield',
     'mptt',

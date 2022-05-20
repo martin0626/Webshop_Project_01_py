@@ -11,7 +11,7 @@ from webshop_01.users.utils import token_generator
 user = auth.get_user_model()
 
 
-def send_email_message(email, user_id):
+def verification_email_message(email, user_id):
 
     uidb64 = urlsafe_base64_encode(force_bytes(user_id))
     token = token_generator.make_token(user.object.get(id=user_id))
@@ -31,6 +31,23 @@ def send_email_message(email, user_id):
         body,
         sender,
         [email],
+    )
+
+    email.send(fail_silently=False)
+
+
+def contact_email_message(name, email, subject, message):
+
+    body = f'{message}\nFrom: {email}'
+    sender = os.environ.get('GMAIL_USER')
+    header = f'{name} - {subject}'
+    recipient = os.environ.get('GMAIL_USER')
+
+    email = EmailMessage(
+        header,
+        body,
+        sender,
+        [recipient],
     )
 
     email.send(fail_silently=False)
