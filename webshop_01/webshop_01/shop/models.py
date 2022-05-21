@@ -49,16 +49,7 @@ class Brand(models.Model):
         return self.name
 
 
-class ProductGallery(models.Model):
-    image = models.ImageField(
-        upload_to='product_photos'
-    )
-    is_active = models.BooleanField(
-        default=True,
-    )
-    is_cover = models.BooleanField(
-        default=False,
-    )
+
 
 
 class Product(models.Model):
@@ -115,14 +106,31 @@ class Product(models.Model):
         blank=True,
     )
 
-    images = models.ForeignKey(
-        ProductGallery,
-        on_delete=models.CASCADE,
+    cover_image = models.ImageField(
+        upload_to='product_photos',
         null=True,
     )
 
     def __str__(self):
         return self.title
+
+
+class ProductGallery(models.Model):
+    image = models.ImageField(
+        upload_to='product_photos'
+    )
+    is_active = models.BooleanField(
+        default=True,
+    )
+    is_cover = models.BooleanField(
+        default=False,
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        null=True,
+    )
 
 
 class Order(models.Model):

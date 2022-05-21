@@ -9,10 +9,16 @@ class CategoryAdmin(DraggableMPTTAdmin):
     mptt_level_indent = 20
 
 
+class GalleryInline(admin.TabularInline):
+    model = ProductGallery
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title']
     prepopulated_fields = {"slug": ("title",)}
+    inlines = [GalleryInline]
+
 
 
 @admin.register(Brand)
