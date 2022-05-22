@@ -98,7 +98,7 @@
                                                     class="far fa-heart"></i></a></li>
                                             <li><a class="btn btn-success text-white mt-2" href="{% url "shop_details" product.pk %}"><i
                                                     class="far fa-eye"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i
+                                            <li id="cart" data-product-id="{{ product.id }}"><a class="btn btn-success text-white mt-2"><i
                                                     class="fas fa-cart-plus"></i></a></li>
                                         </ul>
                                     </div>
@@ -272,27 +272,8 @@
             </div>
         </div>
     </section>
-    <---->
-    <script>
-        function addStars() {
-            let ratingList = Array.from(document.getElementsByClassName('rating'));
-            ratingList.forEach(addElements);
-
-            function addElements(item) {
-                let starsYellow = Number(item.getAttribute("data-rating"));
-                let whiteStars = 5 - starsYellow;
-                let htmlStr = '';
-                for (let i = 0; i < starsYellow; i++) {
-                    htmlStr += `<i class="text-warning fa fa-star"></i>\n`
-                }
-                for (let i = 0; i < whiteStars; i++) {
-                    htmlStr += `<i class="text-muted fa fa-star"></i>\n`
-                }
-                item.innerHTML = htmlStr
-            }
-        }
-        addStars();
-    </script>
+    <script src="{% get_static_prefix %}js/shop_rate.js"></script>
+    <script src="{% get_static_prefix %}js/add_to_cart.js"></script>
     <!--End Brands-->
 {% endblock %}>
 
