@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'webshop_01.navigation',
     'webshop_01.text_pages',
     'webshop_01.contacts',
+    'webshop_01.api',
 
     'djrichtextfield',
     'mptt',
-    'adminsortable2'
+    'adminsortable2',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 
 from webshop_01.shop.models import Product, ProductGallery
