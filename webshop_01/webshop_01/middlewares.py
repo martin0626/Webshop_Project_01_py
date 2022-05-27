@@ -1,7 +1,10 @@
-# def last_viewed_articles_middleware(get_response):
-#     def middleware(request):
-#         viewed_articles_ids = request.session.get('viewed_articles_ids', [])
-#         articles = Article.objects.filter(id__in=viewed_articles_ids)
-#         request.viewed_articles_ids = articles
-#         return get_response(request)
-#     return middleware
+from webshop_01.shop.models import Product
+
+
+def added_products_to_cart_middleware(get_response):
+    def middleware(request):
+        products_slugs = request.session.get('cart', [])
+        cart = Product.objects.filter(slug__in=products_slugs)
+        request.cart_products = cart
+        return get_response(request)
+    return middleware

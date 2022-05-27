@@ -13,6 +13,8 @@ class ShopView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         cover_image = self.request
+        # cart_products = self.request.cart_products
+        # context['cart_products'] = cart_products
         return context
 
 
@@ -29,4 +31,5 @@ class ProductDetailsView(DetailView):
 
         context['related_products'] = related_products[:4]
         context['photos'] = photos
+
         return context

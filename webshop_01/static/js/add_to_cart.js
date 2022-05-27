@@ -4,9 +4,15 @@ async function Add_to_cart(){
 
     function addEventOnClick(item){
         item.addEventListener('click', async ()=>{
+        let cart_number = document.getElementById('cart_number');
         let productSlug = item.getAttribute("data-product-slug");
+        if (!Object.keys(sessionStorage).includes(productSlug)){
+            cart_number.textContent = parseInt(cart_number.textContent) + 1;
+        }
+        console.log(Object.keys(sessionStorage).includes(productSlug))
+        sessionStorage.setItem(productSlug, productSlug);
         // sessionStorage.setItem(productSlug, productSlug);
-        await addToCart(productSlug)
+        await addToCart(productSlug);
     })
     }
 }

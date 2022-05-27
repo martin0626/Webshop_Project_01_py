@@ -6,3 +6,10 @@ def nav_processor(request):
     return {
         'base_navigation': base_navigation,
     }
+
+
+def cart_processor(request):
+    cart_products = request.cart_products
+    return {
+        'cart_products': cart_products,
+    }

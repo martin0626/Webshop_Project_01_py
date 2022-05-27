@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'webshop_01.middlewares.added_products_to_cart_middleware'
 ]
 
 ROOT_URLCONF = 'webshop_01.urls'
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'webshop_01.navigation.context_processors.nav_processor',
+                'webshop_01.navigation.context_processors.cart_processor',
             ],
         },
     },
