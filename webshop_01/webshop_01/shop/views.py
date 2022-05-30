@@ -33,3 +33,7 @@ class ProductDetailsView(DetailView):
         context['photos'] = photos
 
         return context
+
+
+class CartView(TemplateView):
+    template_name = 'pages/cart.html'

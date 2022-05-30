@@ -9,9 +9,7 @@ async function Add_to_cart(){
         if (!Object.keys(sessionStorage).includes(productSlug)){
             cart_number.textContent = parseInt(cart_number.textContent) + 1;
         }
-        console.log(Object.keys(sessionStorage).includes(productSlug))
         sessionStorage.setItem(productSlug, productSlug);
-        // sessionStorage.setItem(productSlug, productSlug);
         await addToCart(productSlug);
     })
     }

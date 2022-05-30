@@ -6,5 +6,7 @@ def added_products_to_cart_middleware(get_response):
         products_slugs = request.session.get('cart', [])
         cart = Product.objects.filter(slug__in=products_slugs)
         request.cart_products = cart
+        request.cart_price = sum([product.price for product in cart])
+        print(request.cart_price)
         return get_response(request)
     return middleware

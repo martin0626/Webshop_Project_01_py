@@ -49,9 +49,6 @@ class Brand(models.Model):
         return self.name
 
 
-
-
-
 class Product(models.Model):
     SIZE_CHOICES = (
         ('XS', 'XS'),
