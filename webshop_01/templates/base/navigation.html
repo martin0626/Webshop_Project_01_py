@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
     <div class="container text-light">
         <div class="w-100 d-flex justify-content-between">
@@ -40,17 +41,17 @@
         <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
              id="templatemo_main_nav">
             <div class="flex-fill">
-                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                <ul id="nav" class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     {% for btn in base_navigation %}
                         {% if btn.title == 'Register' and request.user.is_authenticated %}
                         {% elif btn.title == 'Login' and request.user.is_authenticated %}
                         {% elif btn.title == 'Logout' and request.user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
+                                <a id="{{ btn.title }}" class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
                             </li>
                         {% elif btn.title != 'Logout' %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
+                                <a id="{{ btn.title }}" class="nav-link" href="{{ btn.get_absolute_url }}">{{ btn.title }}</a>
                             </li>
                         {% endif %}
 
@@ -93,3 +94,4 @@
 
     </div>
 </nav>
+<script src="{% get_static_prefix %}js/cart/clear_cart.js"></script>

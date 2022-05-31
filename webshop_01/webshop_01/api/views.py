@@ -17,12 +17,23 @@ class CartProducts(views.APIView):
         return Response(session)
 
     def post(self, request):
-        body_unicode = request.body.decode('utf-8')
-        body = json.loads(body_unicode)
-        slug = body['slug']
+        slug = request.data.get('slug')
         cart_info = request.session.get('cart', [])
         if slug not in cart_info:
             cart_info.insert(0, slug)
+            request.session['cart'] = cart_info
+        print(cart_info)
+        return Response()
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DeleteCartProduct(views.APIView):
+
+    def post(self, request):
+        slug = request.data.get('slug')
+        cart_info = request.session.get('cart', [])
+        if slug in cart_info:
+            cart_info.remove(slug)
             request.session['cart'] = cart_info
         print(cart_info)
         return Response()
