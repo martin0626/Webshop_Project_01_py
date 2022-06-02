@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 
-from webshop_01.shop.models import Product, ProductGallery
+from webshop_01.shop.models import Product, ProductGallery, Category
 
 
 class ShopView(ListView):
@@ -13,8 +13,12 @@ class ShopView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         cover_image = self.request
-        # cart_products = self.request.cart_products
-        # context['cart_products'] = cart_products
+        try:
+            category_search = self.kwargs['category']
+            context['products'] = self.model.objects.filter(category__slug=category_search)
+        except KeyError:
+            pass
+        context['categories'] = Category.objects.filter(parent=None)
         return context
 
 
