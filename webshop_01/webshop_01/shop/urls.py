@@ -5,6 +5,7 @@ from webshop_01.shop.views import ShopView, ProductDetailsView, CartView
 urlpatterns = [
     path('', ShopView.as_view(), name='shop'),
     path('<str:category>', ShopView.as_view(), name='shop'),
+    path('<str:category>/<str:gender>', ShopView.as_view(), name='shop'),
     path('cart/', CartView.as_view(), name='cart'),
-    path('details/<int:pk>/', ProductDetailsView.as_view(), name='shop_details'),
+    path('details/<str:slug>/', ProductDetailsView.as_view(), name='shop_details'),
 ]

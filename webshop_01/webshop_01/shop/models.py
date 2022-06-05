@@ -58,6 +58,11 @@ class Product(models.Model):
         ('XL', 'XL'),
     )
 
+    GENDER_CHOICES = (
+        ('Men', 'Men'),
+        ('Women', 'Women'),
+    )
+
     title = models.CharField(
         max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN
     )
@@ -106,6 +111,12 @@ class Product(models.Model):
     cover_image = models.ImageField(
         upload_to='product_photos',
         null=True,
+    )
+
+    gender = models.CharField(
+        choices=GENDER_CHOICES,
+        max_length=max([len(choice) for choice, _ in GENDER_CHOICES]),
+        default='Men',
     )
 
     def __str__(self):
