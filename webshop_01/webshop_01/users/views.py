@@ -6,9 +6,11 @@ from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.utils.encoding import force_str
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 
+from webshop_01.shop.models import Product
 from webshop_01.users.forms import RegisterForm, LoginForm
+from webshop_01.users.models import UserFavourites
 from webshop_01.users.utils import token_generator
 
 user_model = auth.get_user_model()
@@ -61,3 +63,20 @@ class VerificationView(View):
             pass
 
         return 'success redirect'
+
+
+class FavouritesView(ListView):
+    model = UserFavourites
+    template_name = 'pages/favourites.html'
+
+    @staticmethod
+    def get_slug_fields(favourite_products):
+        return [p.product for p in favourite_products]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        favourite_products_for_user = self.model.objects.filter(user=self.request.user)
+        products = Product.objects.filter(slug__in=self.get_slug_fields(favourite_products_for_user))
+        context['fav_products'] = products
+        return context
+

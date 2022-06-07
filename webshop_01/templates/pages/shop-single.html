@@ -216,8 +216,7 @@
                                         </button>
                                     </div>
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit"
-                                                value="addtocard">Add To Cart
+                                        <button id="cart" data-product-slug="{{ product.slug }}" class="btn btn-success btn-lg">Add To Cart
                                         </button>
                                     </div>
                                 </div>
@@ -250,9 +249,9 @@
                                     <ul class="list-unstyled">
                                         <li><a class="btn btn-success text-white" href="shop-single.html"><i
                                                 class="far fa-heart"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'shop_details' related.pk %}"><i
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'shop_details' related.slug %}"><i
                                                 class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i
+                                        <li><a id="cart" data-product-slug="{{ related.slug }}" class="btn btn-success text-white mt-2" href="#"><i
                                                 class="fas fa-cart-plus"></i></a></li>
                                     </ul>
                                 </div>
@@ -285,6 +284,7 @@
                 {% endfor %}
             {% endif %}
             </div>
+        <script src="{% get_static_prefix %}js/cart/add_to_cart.js"></script>
     </section>
     <!-- End Article -->
 

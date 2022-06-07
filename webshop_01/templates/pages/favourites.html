@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% load mptt_tags %}
+
+
 {% block body_content %}
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -23,54 +24,12 @@
 
     <!-- Start Content -->
     <div class="container py-5">
+        <h1 class="text-center mb-5 text-success">Your Favourite Products</h1>
         <div class="row">
-
-            <div class="col-lg-3">
-                <h1 class="h2 pb-4">Categories</h1>
-                <ul class="list-unstyled templatemo-accordion">
-                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none pt-1 pb-3"
-                       href="{% url 'shop' %}">
-                        Show All
-                    </a>
-                    {% for category in categories %}
-                        <li class="pb-3">
-                            <a class="collapsed d-flex justify-content-between h3 text-decoration-none"
-                               href="{% url 'shop' category.title %}">
-                                {{ category.title }}
-                                <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                            </a>
-                            <ul class="collapse show list-unstyled p-3">
-                                <li><a class="text-decoration-none" href="{% url 'shop' category.slug %}">All</a></li>
-                                {% for child in category.get_children %}
-                                    <li><a class="text-decoration-none"
-                                           href="{% url 'shop' child.slug %}">{{ child.title }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
             <div class="col-lg-9">
                 <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-inline shop-top-menu pb-3 pt-1">
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'shop' category %}">All</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="{% url 'shop' category 'Men' %}">Men's</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="{% url 'shop' category 'Women' %}">Women's</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="row">
-                    {% for product in products %}
-                        <div class="col-md-4">
+                    {% for product in fav_products %}
+                        <div class="col-md-4" style="margin-left: 500px">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
                                     <img class="card-img rounded-0 img-fluid" style="width: 400px; height: 200px"
@@ -78,7 +37,8 @@
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             {% if request.user.is_authenticated %}
-                                                <li><a data-product-slug="{{ product.slug }}" class="btn btn-success text-white favourites" href="#"><i
+                                                <li><a data-product-slug="{{ product.slug }}"
+                                                       class="btn btn-success text-white favourites" href="#"><i
                                                         class="far fa-heart"></i></a></li>
                                             {% endif %}
                                             <li><a class="btn btn-success text-white mt-2"
@@ -115,7 +75,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div div="row">
+                <div class="row mt-4" style="margin-right: 210px">
                     <ul class="pagination pagination-lg justify-content-end">
                         <li class="page-item disabled">
                             <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#"
@@ -130,8 +90,11 @@
                     </ul>
                 </div>
             </div>
-
         </div>
+    </div>
+
+
+    </div>
     </div>
     <!-- End Content -->
 
@@ -262,9 +225,4 @@
             </div>
         </div>
     </section>
-    <script src="{% get_static_prefix %}js/shop_rate.js"></script>
-    <script src="{% get_static_prefix %}js/add_to_favourites.js"></script>
-    <script src="{% get_static_prefix %}js/cart/add_to_cart.js"></script>
-    <!--End Brands-->
-{% endblock %}>
-
+{% endblock %}

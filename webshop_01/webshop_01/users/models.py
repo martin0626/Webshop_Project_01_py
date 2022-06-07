@@ -27,6 +27,17 @@ class ShopUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     object = ShopUserManager()
 
 
+class UserFavourites(models.Model):
+    product = models.CharField(
+        max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN,
+    )
+
+    user = models.ForeignKey(
+        ShopUser,
+        on_delete=models.CASCADE,
+    )
+
+
 class Profile(models.Model):
 
     user = models.OneToOneField(
@@ -55,6 +66,12 @@ class Profile(models.Model):
         max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN,
         null=True,
         blank=True,
+    )
+    # TODO Remove Null=True On DATABASE Change!
+    favourites = models.ForeignKey(
+        UserFavourites,
+        on_delete=models.CASCADE,
+        null=True,
     )
 
     @property
