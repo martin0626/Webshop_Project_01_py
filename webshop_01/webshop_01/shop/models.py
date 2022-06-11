@@ -28,6 +28,10 @@ class Category(MPTTModel):
         unique=True,
         blank=True,
     )
+    # TODO remove null = True on migration
+    picture = models.ImageField(
+        null=True,
+    )
 
     class MPTTMeta:
         order_insertion_by = ['title']
