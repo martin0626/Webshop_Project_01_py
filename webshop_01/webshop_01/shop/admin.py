@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
-from webshop_01.shop.models import Category, Product, ProductGallery, Brand, Order
+from webshop_01.shop.models import Category, Product, ProductGallery, Brand, Order, Size
 
 
 @admin.register(Category)
@@ -24,6 +24,11 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ['name']
+
+
+@admin.register(Size)
+class SizeAdmin(admin.ModelAdmin):
+    list_display = ['product']
 
 
 @admin.register(ProductGallery)

@@ -54,13 +54,6 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
-    SIZE_CHOICES = (
-        ('XS', 'XS'),
-        ('S', 'S'),
-        ('M', 'M'),
-        ('L', 'L'),
-        ('XL', 'XL'),
-    )
 
     GENDER_CHOICES = (
         ('Men', 'Men'),
@@ -90,11 +83,6 @@ class Product(models.Model):
     description = RichTextField()
 
     specification = RichTextField()
-
-    size = models.CharField(
-        choices=SIZE_CHOICES,
-        max_length=max([len(choice) for choice, _ in SIZE_CHOICES]),
-    )
 
     quantity = models.PositiveIntegerField()
 
@@ -178,4 +166,22 @@ class Order(models.Model):
         return super().save(*args, **kwargs)
 
 
+class Size(models.Model):
+    SIZE_CHOICES = (
+        ('XS', 'XS'),
+        ('S', 'S'),
+        ('M', 'M'),
+        ('L', 'L'),
+        ('XL', 'XL'),
+    )
+    size = models.CharField(
+        max_length=max([len(c) for c, _ in SIZE_CHOICES]),
+        choices=SIZE_CHOICES,
+    )
 
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )

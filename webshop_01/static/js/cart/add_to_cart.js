@@ -19,7 +19,8 @@ async function Add_to_cart(){
     button.forEach(addEventOnClick)
 
     function addEventOnClick(item){
-        item.addEventListener('click', async ()=>{
+        item.addEventListener('click', async (event)=>{
+        event.preventDefault()
         let cart_number = document.getElementById('cart_number');
         let productSlug = item.getAttribute("data-product-slug");
         if (!Object.keys(sessionStorage).includes(productSlug)){

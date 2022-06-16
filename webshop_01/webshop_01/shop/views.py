@@ -50,7 +50,7 @@ class ProductDetailsView(DetailView):
         related_products = Product.objects.filter(category=product.category).exclude(slug=self.kwargs['slug'])
 
         context['related_products'] = related_products[:4]
-        context['photos'] = photos
+        context['photos'] = photos[:3]
 
         return context
 
