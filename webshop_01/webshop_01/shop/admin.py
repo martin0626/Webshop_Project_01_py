@@ -28,7 +28,7 @@ class BrandAdmin(admin.ModelAdmin):
 
 @admin.register(Size)
 class SizeAdmin(admin.ModelAdmin):
-    list_display = ['product']
+    pass
 
 
 @admin.register(ProductGallery)

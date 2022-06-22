@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 
-from webshop_01.shop.models import Product, ProductGallery, Category
+from webshop_01.shop.models import Product, ProductGallery, Category, Size
 
 
 class ShopView(ListView):
@@ -48,10 +48,11 @@ class ProductDetailsView(DetailView):
         context = super().get_context_data(**kwargs)
         photos = ProductGallery.objects.filter(product__slug=self.kwargs['slug'])
         related_products = Product.objects.filter(category=product.category).exclude(slug=self.kwargs['slug'])
+        sizes = Size.objects.filter(product__slug=self.kwargs['slug'], quantity__gt=0)
 
+        context['sizes'] = sizes
         context['related_products'] = related_products[:4]
         context['photos'] = photos[:3]
-
         return context
 
 
