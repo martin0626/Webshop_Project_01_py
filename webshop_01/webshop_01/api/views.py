@@ -25,7 +25,7 @@ class CartProducts(views.APIView):
         if slug not in cart_info:
             cart_info.insert(0, slug)
             request.session['cart'] = cart_info
-        print(cart_info)
+        print(request.session)
         return Response()
 
 
@@ -65,3 +65,9 @@ class AddProductToFavourites(views.APIView):
     def get(self, request):
         user = request.user
         return JsonResponse(self.get_favourites_count(user))
+
+
+class ProductsInCart(views.APIView):
+
+    def get(self, request, safe=False):
+        return JsonResponse(request.session.get('cart', []), safe=False)
