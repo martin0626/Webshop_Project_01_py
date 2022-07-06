@@ -75,7 +75,7 @@
                                 <div class="card rounded-0">
                                     <img class="card-img rounded-0 img-fluid" style="width: 400px; height: 200px"
                                          src="{{ product.cover_image.url }}">
-                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <div  class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             {% if request.user.is_authenticated %}
                                                 <li><a data-product-slug="{{ product.slug }}" class="btn btn-success text-white favourites" href="#"><i
@@ -263,7 +263,7 @@
         </div>
     </section>
     <script src="{% get_static_prefix %}js/shop_rate.js"></script>
-    <script src="{% get_static_prefix %}js/add_to_favourites.js"></script>
+    <script src="{% get_static_prefix %}js/favourites/add_to_favourites.js"></script>
     <script src="{% get_static_prefix %}js/cart/add_to_cart.js"></script>
     <!--End Brands-->
 {% endblock %}>

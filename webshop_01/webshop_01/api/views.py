@@ -34,7 +34,10 @@ class DeleteCartProduct(views.APIView):
 
     def post(self, request):
         slug = request.data.get('slug')
+        price = request.data.get('price')
         cart_info = request.session.get('cart', [])
+        request.cart_price -= price
+
         if slug in cart_info:
             cart_info.remove(slug)
             request.session['cart'] = cart_info
@@ -64,8 +67,20 @@ class AddProductToFavourites(views.APIView):
 
     def get(self, request):
         user = request.user
-        return JsonResponse(self.get_favourites_count(user))
+        if request.user.is_authenticated:
+            return JsonResponse(self.get_favourites_count(user))
+        return JsonResponse({"favourites_count": 0})
 
+
+class DeleteProductFromFavourites(AddProductToFavourites):
+    def post(self, request):
+        slug = request.data.get('slug')
+        user = request.user
+        favourite = UserFavourites.objects.filter(product=slug, user=user)
+        if favourite:
+            favourite.delete()
+
+        return JsonResponse(self.get_favourites_count(user))
 
 class ProductsInCart(views.APIView):
 

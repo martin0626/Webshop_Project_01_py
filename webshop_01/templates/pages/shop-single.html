@@ -227,8 +227,10 @@
                                      src="{{ related.cover_image.url }}">
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
+                                        {% if request.user.is_authenticated %}
                                         <li><a class="btn btn-success text-white" href="shop-single.html"><i
                                                 class="far fa-heart"></i></a></li>
+                                        {% endif %}
                                         <li><a class="btn btn-success text-white mt-2"
                                                href="{% url 'shop_details' related.slug %}"><i
                                                 class="far fa-eye"></i></a></li>

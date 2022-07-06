@@ -29,7 +29,7 @@
             <div class="col-lg-9">
                 <div class="row">
                     {% for product in fav_products %}
-                        <div class="col-md-4" style="margin-left: 500px">
+                        <div id="{{ product.slug}}" class="col-md-4" style="margin-left: 500px">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
                                     <img class="card-img rounded-0 img-fluid" style="width: 400px; height: 200px"
@@ -39,7 +39,7 @@
                                             {% if request.user.is_authenticated %}
                                                 <li><a data-product-slug="{{ product.slug }}"
                                                        class="btn btn-success text-white favourites" href="#"><i
-                                                        class="far fa-heart"></i></a></li>
+                                                        class="fa fa-times"></i></a></li>
                                             {% endif %}
                                             <li><a class="btn btn-success text-white mt-2"
                                                    href="{% url "shop_details" product.slug %}"><i
@@ -56,7 +56,6 @@
                                     <a href="{% url 'shop_details' product.slug %}"
                                        class="h3 text-decoration-none">{{ product.title }}</a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                        <li>M/L/X/XL</li>
                                         <li class="pt-2">
                                             <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
                                             <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
@@ -225,4 +224,5 @@
             </div>
         </div>
     </section>
+    <script src="{% get_static_prefix %}js/favourites/remove_from_favourites.js"></script>
 {% endblock %}

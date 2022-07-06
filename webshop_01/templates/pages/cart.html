@@ -11,7 +11,7 @@
                 <div class="title_cart">
                     <div class="row">
                         <div class="col"><h4><b>Shopping Cart</b></h4></div>
-                        <div class="col align-self-center text-right text-muted">{{ cart_products|length }} items</div>
+                        <div id="products_count" class="col align-self-center text-right text-muted">{{ cart_products|length }} items</div>
                     </div>
                 </div>
 
@@ -27,7 +27,7 @@
                                 <div class="col">
                                     <a href="#" class="text-decoration-none">-</a><a href="#" class="border text-decoration-none">1</a><a class="text-decoration-none" href="#">+</a>
                                 </div>
-                                <div class="col">BGN {{ product.price|floatformat:2 }} <a data-product-slug="{{ product.slug }}" href="#" class="delete_cart_element close_cart text-decoration-none">&#10005;</a></div>
+                                <div class="col">BGN {{ product.price|floatformat:2 }} <a data-product-price="{{ product.price }}" data-product-slug="{{ product.slug }}" href="#" class="delete_cart_element close_cart text-decoration-none">&#10005;</a></div>
                             </div>
                         </div>
                     {% endfor %}
@@ -39,10 +39,6 @@
             <div class="col-md-4 summary">
                 <div><h5><b>Summary</b></h5></div>
                 <hr>
-                <div class="row">
-                    <div class="col" style="padding-left:0;">ITEMS {{ cart_products|length }}</div>
-                    <div class="col text-right">BGN {{ request.cart_price|floatformat:2 }}</div>
-                </div>
                 <form>
                     <p>SHIPPING</p>
                     <select>
@@ -53,7 +49,7 @@
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">TOTAL PRICE</div>
-                    <div class="col text-right">BGN {{ request.cart_price|floatformat:2 }}</div>
+                    <div class="col text-right" data-total-price="{{ request.cart_price }}" id="total_price">BGN {{ request.cart_price|floatformat:2 }}</div>
                 </div>
                 <button class="btn_cart">CHECKOUT</button>
             </div>
