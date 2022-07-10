@@ -12,5 +12,4 @@ urlpatterns = [
     path('api/', include('webshop_01.api.urls')),
     path('search/', include('webshop_01.search.urls')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
-    path('^search/', include('haystack.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
