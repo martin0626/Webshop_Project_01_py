@@ -58,7 +58,7 @@
               autocomplete="on">
             <div class="input-group mb-2">
                 <input type="text" class="form-control" id="inputModalSearch" name="search" placeholder="Search ...">
-                <button type="submit" class="input-group-text bg-success text-light">
+                <button class="input-group-text bg-success text-light">
                     <i class="fa fa-fw fa-search text-white"></i>
                 </button>
             </div>
@@ -66,9 +66,15 @@
     </div>
 </div>
 <!-- End Modal -->
-{% block body_content %}
 
+<!-- Start Content -->
+{% block body_content %}
 {% endblock %}
+<!-- End Content -->
+
+<!-- Start Brands -->
+{% include 'base/brands.html' %}
+<!-- End Brands-->
 
 <!-- Start Footer -->
 <footer class="bg-dark" id="tempaltemo_footer">
@@ -94,8 +100,11 @@
 </script>
 <!-- End Script -->
 
+<!-- Start Added Script -->
 {% block additional_script %}
 {% endblock %}
+<!-- End Added Script -->
+
 </body>
 
 </html>

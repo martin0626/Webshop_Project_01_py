@@ -7,7 +7,7 @@ from webshop_01.shop.models import Product
 
 def search_view(request, *args, **kwargs):
     query = request.GET.get('search')
-    result = SearchQuerySet().filter(text=query)
+    result = SearchQuerySet().filter(text__startswith=query)
 
     context = {
         'products': result,
@@ -22,6 +22,6 @@ def autocomplete(request):
         query = request.GET.get('term')
         qs = Product.objects.filter(title__startswith=query, is_active=True)
         titles = [r.title for r in qs]
-        print(titles)
         return JsonResponse(titles, safe=False)
+
     return render(request, 'pages/index.html')
