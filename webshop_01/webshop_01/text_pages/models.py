@@ -41,3 +41,26 @@ class Banner(models.Model):
 
     class Meta:
         ordering = ['my_order']
+
+
+class OurServices(models.Model):
+    title = models.CharField(
+        max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN,
+    )
+
+    fa_icon = models.CharField(
+        max_length=constants.CHAR_FIELD_DEFAULT_MAX_LEN,
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+    )
+
+    my_order = models.PositiveSmallIntegerField(
+        default=0,
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        ordering = ['my_order']

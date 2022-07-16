@@ -81,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'webshop_01.navigation.context_processors.nav_processor',
                 'webshop_01.navigation.context_processors.cart_processor',
+                'webshop_01.shop.context_processors.category_processor',
             ],
         },
     },
