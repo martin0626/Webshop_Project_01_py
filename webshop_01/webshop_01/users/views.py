@@ -68,15 +68,15 @@ class VerificationView(View):
 class FavouritesView(ListView):
     model = UserFavourites
     template_name = 'pages/favourites.html'
+    paginate_by = 4
+    context_object_name = 'fav_products'
 
     @staticmethod
     def get_slug_fields(favourite_products):
         return [p.product for p in favourite_products]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
         favourite_products_for_user = self.model.objects.filter(user=self.request.user)
         products = Product.objects.filter(slug__in=self.get_slug_fields(favourite_products_for_user))
-        context['fav_products'] = products
-        return context
+        return products
 

@@ -1,19 +1,20 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.generic import ListView
 from haystack.query import SearchQuerySet
 
 from webshop_01.shop.models import Product
 
 
-def search_view(request, *args, **kwargs):
-    query = request.GET.get('search')
-    result = SearchQuerySet().filter(text__startswith=query)
+class SearchView(ListView):
+    model = Product
+    template_name = 'pages/search_results.html'
+    context_object_name = 'products'
 
-    context = {
-        'products': result,
-    }
-
-    return render(request, 'pages/search_results.html', context)
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        result = SearchQuerySet().filter(text__startswith=query)
+        return result
 
 
 def autocomplete(request):
