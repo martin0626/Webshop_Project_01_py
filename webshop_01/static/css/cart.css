@@ -136,6 +136,7 @@ input:focus::-webkit-input-placeholder {
     margin-top: 4vh;
     padding: 1vh;
     border-radius: 0;
+    text-decoration: none;
 }
 
 .btn_cart:focus {

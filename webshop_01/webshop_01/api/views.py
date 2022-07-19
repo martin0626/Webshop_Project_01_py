@@ -73,6 +73,7 @@ class AddProductToFavourites(views.APIView):
 
 
 class DeleteProductFromFavourites(AddProductToFavourites):
+
     def post(self, request):
         slug = request.data.get('slug')
         user = request.user
@@ -81,6 +82,7 @@ class DeleteProductFromFavourites(AddProductToFavourites):
             favourite.delete()
 
         return JsonResponse(self.get_favourites_count(user))
+
 
 class ProductsInCart(views.APIView):
 
