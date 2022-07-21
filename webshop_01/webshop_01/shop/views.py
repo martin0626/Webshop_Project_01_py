@@ -63,3 +63,4 @@ class CartView(TemplateView):
 
 class PaymentView(TemplateView):
     template_name = 'pages/payment.html'
+
