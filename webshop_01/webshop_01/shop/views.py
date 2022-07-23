@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import ListView, TemplateView, DetailView, CreateView
 
-from webshop_01.shop.models import Product, ProductGallery, Category, Size
+from webshop_01.shop.forms import OrderForm
+from webshop_01.shop.models import Product, ProductGallery, Category, Size, Order
 
 
 class ShopView(ListView):
@@ -61,6 +63,14 @@ class CartView(TemplateView):
     template_name = 'pages/cart.html'
 
 
-class PaymentView(TemplateView):
+class PaymentView(CreateView):
     template_name = 'pages/payment.html'
+    model = Order
+    success_url = reverse_lazy('shop')
+    form_class = OrderForm
+
+    # TODO Add Products To Order
+    def form_valid(self, form):
+        print(self.kwargs)
+        return super().form_valid(form)
 

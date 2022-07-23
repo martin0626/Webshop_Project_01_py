@@ -7,3 +7,5 @@ INTEGER_DEFAULT_MIN_VALUE = 0
 RATING_DEFAULT_MIN_VALUE = 0
 RATING_DEFAULT_MAX_VALUE = 5
 PHONE_LEN = 10
+ORDER_NUMBER_SIZE = 8
+ascii_codes_for_uppercase_letters__numbers = [n for n in range(65, 91)] + [n for n in range(48, 58)]

@@ -39,3 +39,4 @@ class ProductGalleryAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['order_number']
+    readonly_fields = ["order_number"]
