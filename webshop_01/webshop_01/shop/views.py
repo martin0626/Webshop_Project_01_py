@@ -71,6 +71,10 @@ class PaymentView(CreateView):
 
     # TODO Add Products To Order
     def form_valid(self, form):
-        print(self.kwargs)
-        return super().form_valid(form)
+        if self.request.user:
+            form.instance.user = self.request.user
 
+        products = Product.objects.filter(slug__in=self.request.session.get('cart', []))
+        form.save()
+        form.instance.products.add(*products)
+        return super().form_valid(form)
