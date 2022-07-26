@@ -7,7 +7,6 @@ function clear_on_logout() {
         })
     } catch (TypeError) {
     }
-
 }
 
 

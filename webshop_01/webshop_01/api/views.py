@@ -88,3 +88,13 @@ class ProductsInCart(views.APIView):
 
     def get(self, request, safe=False):
         return JsonResponse(request.session.get('cart', []), safe=False)
+
+# TODO Finish Alert Functionality
+class AlertCall(views.APIView):
+
+    def get(self, request):
+        message = request.kwargs['msg']
+        data = {
+            'message': message,
+        }
+        return JsonResponse(data)

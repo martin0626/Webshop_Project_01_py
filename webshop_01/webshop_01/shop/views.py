@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
@@ -69,7 +69,6 @@ class PaymentView(CreateView):
     success_url = reverse_lazy('shop')
     form_class = OrderForm
 
-    # TODO Add Products To Order
     def form_valid(self, form):
         if self.request.user:
             form.instance.user = self.request.user
@@ -77,4 +76,5 @@ class PaymentView(CreateView):
         products = Product.objects.filter(slug__in=self.request.session.get('cart', []))
         form.save()
         form.instance.products.add(*products)
+        # redirect('alert', 'done')
         return super().form_valid(form)
