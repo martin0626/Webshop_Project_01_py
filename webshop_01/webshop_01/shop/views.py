@@ -1,5 +1,6 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
 
@@ -63,10 +64,11 @@ class CartView(TemplateView):
     template_name = 'pages/cart.html'
 
 
-class PaymentView(CreateView):
+class PaymentView(SuccessMessageMixin, CreateView):
     template_name = 'pages/payment.html'
     model = Order
     success_url = reverse_lazy('shop')
+    success_message = 'Your Order Is Done! Thank You!'
     form_class = OrderForm
 
     def form_valid(self, form):
@@ -76,5 +78,4 @@ class PaymentView(CreateView):
         products = Product.objects.filter(slug__in=self.request.session.get('cart', []))
         form.save()
         form.instance.products.add(*products)
-        # redirect('alert', 'done')
         return super().form_valid(form)

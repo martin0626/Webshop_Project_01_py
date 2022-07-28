@@ -143,6 +143,14 @@
     <script src="{% get_static_prefix %}js/shop_rate.js"></script>
     <script src="{% get_static_prefix %}js/favourites/add_to_favourites.js"></script>
     <script src="{% get_static_prefix %}js/cart/add_to_cart.js"></script>
+    {% if messages %}
+            {#    TODO FINISH THIS#}
+            {% for message in messages %}
+                <script>accessMessage({{ message }})</script>
+            {% endfor %}
+
+    {% endif %}
+    <script src="{% get_static_prefix %}js/alerts.js"></script>
     <!--End Brands-->
 {% endblock %}>
 

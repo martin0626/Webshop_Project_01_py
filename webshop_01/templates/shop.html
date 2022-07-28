@@ -745,6 +745,11 @@ https://templatemo.com/tm-559-zay-shop
     <!-- End Footer -->
 
     <!-- Start Script -->
+    {% if alert_message %}
+        <script src="{% get_static_prefix %}js/alerts.js" onload="accessMessage({{ alert_message }})"></script>
+    {% endif %}
+
+
     <script src="{% get_static_prefix %}js/jquery-1.11.0.min.js"></script>
     <script src="{% get_static_prefix %}js/jquery-migrate-1.2.1.min.js"></script>
     <script src="{% get_static_prefix %}js/bootstrap.bundle.min.js"></script>
