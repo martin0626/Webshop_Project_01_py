@@ -1,18 +1,5 @@
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        let cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+import {accessMessage} from "../alerts.js";
+import {getCookie} from "../get_cookie.js";
 
 async function Add_to_cart(){
     let button = document.querySelectorAll('#cart');
@@ -25,6 +12,7 @@ async function Add_to_cart(){
         let productSlug = item.getAttribute("data-product-slug");
         if (!Object.keys(sessionStorage).includes(productSlug)){
             cart_number.textContent = parseInt(cart_number.textContent) + 1;
+            await accessMessage('Product Added To Cart')
         }
         console.log(Object.keys(sessionStorage).includes(productSlug), sessionStorage)
         sessionStorage.setItem(productSlug, productSlug)
